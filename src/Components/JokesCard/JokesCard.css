@@ -1,8 +1,20 @@
 .card{
     margin-top: 20px ;
     padding: 20px;
-    height: 250px;
+    
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px !important;
    
+}
+.card-body p{
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+}
+.card-body h5{
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+    color: rgb(237, 26, 26);
+    
 }

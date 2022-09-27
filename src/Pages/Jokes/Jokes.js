@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import JokesCard from '../../Components/JokesCard/JokesCard'
 import Navbar from '../../Components/Navbar/Navbar'
 
 import './Jokes'
 import axios from 'axios'
+import ClipLoader from "react-spinners/ClipLoader";
+import './Jokes.css'
+import { AuthContext } from '../../Context/UserContext'
 
 function Jokes() {
+  const { setCurrentUser ,currentUser } = useContext(AuthContext)
+  console.log(currentUser);
+  console.log(setCurrentUser);
+  const [loading, setLoading] = useState(false)
+
   const [card, setCard] = useState()
   console.log(card);
   const sendRequest = async () => {
@@ -16,30 +24,41 @@ function Jokes() {
     console.log(data);
     return data;
   };
+
+  useEffect(() => {
+    setCurrentUser(true)
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [])
   useEffect(() => {
     sendRequest().then((data) => setCard(data.jokes))
   }, [])
 
   return (
-  <div>
-    <Navbar/>
+    <div onLoad={setCurrentUser(true)}>
+      <Navbar />
       <div className='container jokes '>
-      <div className="row">
-       
+        <div className="row">
+
           {
-            card && card.map((data) => {
-              return (
-                <JokesCard data={data} />
-              )
-            })
+            loading ?
+             <div className='loaderDiv col-md-12 '> <ClipLoader color={"#D0021B"} loading={loading}  size={100} /></div>
+              :
+              card && card.map((data) => {
+                return (
+                  <JokesCard data={data} />
+                )
+              })
           }
-       
+
+        </div>
+
+
+
       </div>
-
-
-
     </div>
-  </div>
   )
 }
 

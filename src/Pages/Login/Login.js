@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../Context/UserContext'
 import './Login.css'
 
-function Login(props) {
+function Login() {
+
+    const {setCurrentUser} = useContext(AuthContext)
     
     
     const navigate = useNavigate()
@@ -13,10 +16,14 @@ function Login(props) {
     const [alphabetValidation, setAlphabetValidation] = useState("invalid")
     const [lengthValidation, setLengthValidation] = useState("invalid")
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (alphabetValidation == "valid" && lengthValidation == "valid") {
-            props.setIsLoggedIn(true)
-            navigate('/jokes')
+            
+            setCurrentUser(true)
+            localStorage.setItem('isUser', 'userLoggedIn')
+
+            navigate('/welcome')
         }
     }
 
@@ -85,7 +92,7 @@ function Login(props) {
                 </div>
                 {
                     passwordValidation ? <p id="length" style={{ color: 'red' }} class="invalid">
-                        Minimum <b>8 characters</b>
+                        Minimum <b>8 characters including one uppercase, lowercase & number</b>
                     </p> : null
                 }
                 <div className="form-check">

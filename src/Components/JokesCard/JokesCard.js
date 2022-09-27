@@ -9,9 +9,8 @@ function JokesCard({data}) {
             <div className="card ">
                
                 <div className="card-body">
-                    <h5 className="card-title">{category}</h5>
+                    <h5 className="card-title " >{category}</h5>
                     <p className="card-text">{joke}</p>
-                    <a href="#" className="btn text-align-center ">Read More</a>
                 </div>
             </div>  
 

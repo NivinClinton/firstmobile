@@ -1,39 +1,44 @@
-import { Route, Router, Routes } from 'react-router-dom';
+import { Navigate, Route, Router, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import Jokes from './Pages/Jokes/Jokes';
 import Login from './Pages/Login/Login';
 import Welcome from './Pages/Welcome/Welcome';
-import { useDispatch, useSelector } from "react-redux";
-import { authActions } from './store';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from './Context/UserContext';
 
 
 function App() {
+  // const { currentUser, setCurrentUser } = useContext(AuthContext);
+  // console.log(currentUser);
+  // const ProtectedRoute = ({ children }) => {
+  //   if (!currentUser) {
+  //     return <Navigate to="/login" />;
+  //   }
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  //   return children
+  // };
+
   return (
     <div >
 
 
       <Routes>
-        {!isLoggedIn ? (
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path='/jokes' element={
+          localStorage.getItem('isUser') &&
+          <Jokes />
+        }
+        />
+        <Route path='/welcome' element={
 
-        ) : (
-          <>
-            <Route path="/jokes" element={<Jokes />} />
-            <Route path="/welcome" element={<Welcome />} />
-
-          </>
-        )}
-{/* 
-        {isLoggedIn && <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />}
-
-        <Route path="/jokes" element={<Jokes />} />
-        <Route path="/welcome" element={<Welcome />} /> */}
+          localStorage.getItem('isUser') &&
+          <Welcome />
 
 
+        }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Navigate to="/login" />} />
 
 
       </Routes>
