@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar() {
+    const navigate = useNavigate()
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +20,7 @@ function Navbar() {
                        
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
-                            <button className="btn btn-outline-primary my-2 my-sm-0" type="submit">Logout</button>
+                            <button className="btn btn-outline-primary my-2 my-sm-0" type="submit" onClick={()=>navigate('/login')}>Logout</button>
                     </form>
                 </div>
             </nav>
