@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import './Login.css'
 
-function Login() {
+function Login(props) {
+    
+    
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [passwordValidation, setPasswordValidation] = useState(false);
@@ -13,11 +15,10 @@ function Login() {
 
     const handleSubmit = () => {
         if (alphabetValidation == "valid" && lengthValidation == "valid") {
+            props.setIsLoggedIn(true)
             navigate('/jokes')
         }
-
     }
-
 
     const setUsernameOnchange = (e) => {
         setUsername(e.target.value)

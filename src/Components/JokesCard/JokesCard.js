@@ -5,7 +5,7 @@ function JokesCard({data}) {
     const {category, joke} = data
     
     return (
-        <div className="jokesCard card-group col-md-6">
+        <div className="jokesCard card-group col-md-6 ">
             <div className="card ">
                
                 <div className="card-body">
@@ -13,7 +13,7 @@ function JokesCard({data}) {
                     <p className="card-text">{joke}</p>
                     <a href="#" className="btn text-align-center ">Read More</a>
                 </div>
-            </div>
+            </div>  
 
         </div>
     )
